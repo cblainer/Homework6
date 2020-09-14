@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Preview</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+
+  <script src="./Water_tower.geojson" ></script>
+  <script src= "./Boardwalk.geojson" ></script>
+  <script src= "./marina.geojson" ></script>
+
+  <style type="text/css">
+    body {
+       margin: 0;
+       padding: 0;
+    }
+    html, body, #map{
+       width: 100%;
+       height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+      var map = L.map('map').setView([39.92899016608087, -74.079188726282], 14.0);
+
+      var daMarker = L.marker([39.935266, -74.078226]);
+
+      L.geoJSON(watertower).addTo(map);
+
+      // L.geoJSON(watertower).addTo(map)
+      var towerIcon=L.icon({
+                iconUrl: 'https://banner2.cleanpng.com/20180522/kap/kisspng-kuwait-water-towers-computer-icons-clip-art-5b0423b1271e62.3111033715269979371602.jpg',
+                iconSize: [50,50],
+                popupAnchor: [0,0]
+      });
+      var customPopup = "Freedom Park Water Tower: Freedom Park is a small park area in Seaside Heights that is perfect for picnics, walking your dogs, or just enjoying the sun! The Seaside Heights water tower resides in the middle of Freedom Park. Freedom Park was less established in 1981, but the water tower is still in the exact same spot, seemingly unchanged. This is likely because it is a well-established piece of infrastructure that cannot be particularly “renovated” without a water shortage. This water tower pressurizes water for distribution and provides emergency storage for fire protection. It is very typical to see water towers in beach towns in New Jersey. <br/><img src='https://live.staticflickr.com/1230/646151201_85b9b2634d_b.jpg'width='100px'/>";
+
+      L.geoJSON(watertower, { // a
+        pointToLayer: function (feature, latlng) { // b
+        return L.marker(latlng, {icon: towerIcon});}}) // c
+        .bindPopup(customPopup) // d
+        .addTo(map); //
+
+      
+      var daBoardwalk = L.marker([39.943130, -74.069189]);
+     
+      L.geoJSON(boardwalk).addTo(map);
+
+      // L.geoJSON(boardwalk).addTo(map)
+      var walkIcon=L.icon({
+          iconUrl: 'https://media.istockphoto.com/vectors/view-of-a-port-and-the-sea-vector-id168706157?k=6&m=168706157&s=612x612&w=0&h=TfopH3RcXJYxWcmvcy-2GhITTAJjqR2yJMAW8svF6XM=',
+          iconSize: [50,50],
+          popupAnchor: [0,0]
+      });
+      var customPopup = "Seaside Heights Boardwalk: The Seaside Heights Boardwalk is one of the town’s main tourist attractions and revenue builders. The boardwalk lines the Seaside Heights Beach, and there are beach entrances all along the way. If you look at the differences between the two maps, you can see that the pier with rides on it, Casino Pier, has changed locations over time. It is almost impossible to see the current Casino Pier in the 1981 map. Casino Pier has expanded over time and now has many rides and game options for families or children to enjoy. There are also many food options such as Two Brothers Pizza (my favorite) and Korhs Ice cream if you’re looking to cool down. It is always an action packed day on the boardwalk! <br/><img src='https://shorenewsnetwork.com/wp-content/uploads/2018/07/bigstock-200759407.jpg'width='100px'/>";
+
+      L.geoJSON(boardwalk, { // a
+        pointToLayer: function (feature, latlng) { // b
+        return L.marker(latlng, {icon: walkIcon});}}) // c
+        .bindPopup(customPopup) // d
+        .addTo(map); //     
+
+      var daThird = L.marker([39.930410, -74.079158]);
+      
+      L.geoJSON(marina).addTo(map);
+
+      // L.geoJSON(marina).addTo(map)
+      var marinaIcon=L.icon({
+          iconUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTdNN6V12pw746m7HHLN013y_MZp5kNuuczUA&usqp=CAU',
+          iconSize: [50,50],
+          popupAnchor: [0,0]
+      });
+      var customPopup = "Seaside Park Marina: The Seaside Park Marina is a dock with supplies for both small and large boats to dock. A marina, by definition, differs from a port in that a marina does not handle large passenger ships or cargo from freighters. The Seaside Park Marina has not changed much over the years, except for more renovation to the dock areas and upkeep in the surrounding facilities. This specific marina is a very beautiful sight, as it has a nice boardwalk to walk along, clean bathrooms on site, and a very helpful and accommodating staff. It is pleasurable to sit and watch the boats pass in the afternoon, and always has a beautiful view of the sunset. <br/><img src='https://img.marinas.com/v2/d935f529eb3aaeaef802d0a9baa6e5d48bd419ae58ad9c40b10835971c7bc686.jpg'width='100px'/>";
+
+      L.geoJSON(marina, { // a
+        pointToLayer: function (feature, latlng) { // b
+        return L.marker(latlng, {icon: marinaIcon});}}) // c
+        .bindPopup(customPopup) // d
+        .addTo(map); //     
+      
+      var OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+	      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          }).addTo(map);
+
+      var daPhoto = L.tileLayer('./Tiles4.2/{z}/{x}/{y}.png', {
+        minZoom: 12,
+        maxZoom: 16,
+        tms: false,
+        attribution: 'USGS'
+      })
+
+      var daTiles = {
+        "Open Street Map": OSM,
+        "1981 Seaside": daPhoto
+      }
+
+      var daVectors = {
+        "Freedom Park Water Tower": daMarker,
+        "Seaside Heights Boardwalk Current": daBoardwalk,
+        "Seaside Park Marina": daThird
+      }
+
+      L.control.layers(daTiles, daVectors).addTo(map);
+    
+
+
+  </script>
+</body>
+</html>
