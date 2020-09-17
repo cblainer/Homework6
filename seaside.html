@@ -87,10 +87,9 @@
         return L.marker(latlng, {icon: marinaIcon});}}) // c
         .bindPopup(customPopup) // d
         .addTo(map); //     
-      
-        var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-        {attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'});
 
+        var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'}).addTo(map);
 
       var daPhoto = L.tileLayer('./Tiles4.2/{z}/{x}/{y}.png', {
         minZoom: 12,
@@ -100,7 +99,7 @@
       })
 
       var daTiles = {
-        "Esri_WorldImagery": Esri_WorldImagery,
+        "ESRI": Esri_WorldImagery,
         "1981 Seaside": daPhoto
       }
 
